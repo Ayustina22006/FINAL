@@ -1,0 +1,16 @@
+CATATAN REVISI TEMA PUTIH
+
+Perubahan yang dilakukan:
+1. Background utama dashboard, statistik/analysis, tentang, sidebar, dan footer diratakan menjadi putih.
+2. Dark mode lama dinonaktifkan agar tampilan tidak kembali hitam saat localStorage masih menyimpan tema dark.
+3. Top bar halaman analysis/statistik disamakan dengan top bar dashboard dan tentang.
+4. Bagian user/admin pada top bar analysis/statistik dihapus.
+5. Sidebar halaman analysis/statistik diubah dari Data & Layer menjadi Tentang dan diarahkan ke about.php.
+
+File yang diubah:
+- analysis.php
+- analysis-style.css
+- dashboard-redesign.css
+- about-redesign.css
+- style.css
+- dashboard.js

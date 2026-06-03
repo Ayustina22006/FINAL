@@ -1,0 +1,22 @@
+{
+  "name": "web_ta_aplikasi_final_revisi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "status": "node -e \"console.log('Buka http://localhost:3000/api/status setelah npm start')\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@google/earthengine": "^1.7.29",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  }
+}
+

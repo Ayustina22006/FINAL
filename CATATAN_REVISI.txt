@@ -1,0 +1,13 @@
+CATATAN REVISI APLIKASI
+
+Perubahan yang sudah diterapkan:
+1. Header/menu utama diseragamkan menjadi: Dashboard, Statistik, Tentang.
+2. Checkbox Batas Kabupaten dan Batas Kecamatan di halaman dashboard sudah aktif.
+3. Legenda Random Forest diubah menjadi 3 kelas: Aman, Sedang, Rawan.
+4. Sidebar halaman Statistik disesuaikan menjadi: Dashboard, Statistik, Data & Layer, serta bagian Tentang Statistik.
+5. Fitur cari lokasi dirapikan, termasuk posisi tombol ikon pencarian.
+6. Halaman Tentang: tombol Buka Analisis diubah menjadi Buka Statistik dan badge/logo RF di card utama dihilangkan.
+7. Background sidebar dashboard diperbaiki agar rata sampai bawah mengikuti tinggi halaman.
+
+Catatan:
+Layer batas kabupaten dan kecamatan pada dashboard dibuat sebagai layer GeoJSON sederhana agar fitur checkbox aktif dan terlihat. Jika memiliki file SHP/GeoJSON batas administrasi resmi, koordinat pada dashboard.js dapat diganti dengan data resmi.

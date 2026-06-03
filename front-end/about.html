@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tentang Sistem - GIS Area Rawan Dampak Pertambangan</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dashboard-redesign.css">
+  <link rel="stylesheet" href="about-redesign.css">
+</head>
+
+<body>
+<section id="aboutPage" class="page active about-redesign">
+
+  <!-- ================= TOPBAR SESUAI HALAMAN PETA ================= -->
+  <header class="topbar">
+    <div class="brand-area">
+      <img src="assets/logo_konsel.png" alt="Logo Konawe Selatan" class="brand-logo">
+      <div>
+        <h1>GIS Area Rawan Dampak Pertambangan</h1>
+        <p>Kabupaten Konawe Selatan</p>
+      </div>
+    </div>
+
+    <nav class="top-nav" aria-label="Navigasi utama">
+      <a href="dashboard.php">▥ Dashboard</a>
+      <a href="analysis.php">⌁ Statistik</a>
+      <a href="about.php" class="active">ⓘ Tentang</a>
+    </nav>
+
+    <div class="university-area">
+      <img src="assets/logo_uho.png" alt="Logo Universitas Halu Oleo" class="uho-logo">
+      <span>UNIVERSITAS<br>HALU OLEO</span>
+    </div>
+  </header>
+
+  <!-- ================= BODY ================= -->
+  <div class="about-layout">
+
+    <!-- ================= PANEL KIRI ================= -->
+    <aside class="about-side-panel">
+      <div class="about-panel-section intro-panel">
+        <h3>▧ Tentang Sistem</h3>
+        <p>
+          Web GIS ini digunakan untuk menyajikan informasi area rawan dampak pertambangan di Kabupaten Konawe Selatan secara interaktif.
+        </p>
+      </div>
+
+      <div class="about-panel-section">
+        <h3>Parameter Analisis</h3>
+        <div class="about-layer-row"><span class="layer-symbol slope"></span><span>Kemiringan Lereng</span></div>
+        <div class="about-layer-row"><span class="layer-symbol rain"></span><span>Curah Hujan</span></div>
+        <div class="about-layer-row"><span class="layer-symbol landcover"></span><span>Tutupan Lahan</span></div>
+        <div class="about-layer-row"><span class="layer-symbol rf"></span><span>Random Forest</span></div>
+      </div>
+
+      <div class="about-panel-section legend-section">
+        <h3>Kelas Kerawanan</h3>
+        <div class="legend-item"><span class="box risk-aman"></span>Aman</div>
+        <div class="legend-item"><span class="box risk-sedang"></span>Sedang</div>
+        <div class="legend-item"><span class="box risk-rawan"></span>Rawan</div>
+      </div>
+
+      <div class="about-panel-section action-section">
+        <h3>Aksi</h3>
+        <a href="dashboard.php" class="primary-action about-action">⌖ Lihat Peta</a>
+        <a href="analysis.php" class="secondary-action about-action">⌁ Buka Statistik</a>
+        <button type="button" class="secondary-action logoutBtn">↩ Logout</button>
+      </div>
+    </aside>
+
+    <!-- ================= KONTEN UTAMA ================= -->
+    <main class="about-main-area">
+
+      <section class="about-hero-card">
+        <div>
+          <span class="eyebrow">Tentang Sistem</span>
+          <h2>Sistem GIS Area Rawan Dampak Pertambangan</h2>
+          <p>
+            Sistem ini dirancang untuk membantu visualisasi dan penyajian informasi tingkat kerawanan dampak pertambangan berbasis peta digital. Analisis dilakukan menggunakan algoritma Random Forest dengan parameter kemiringan lereng, curah hujan, dan tutupan lahan di Kabupaten Konawe Selatan.
+          </p>
+        </div>
+
+      </section>
+
+      <section class="about-stat-grid">
+        <article class="about-stat-card">
+          <small>Akurasi Model</small>
+          <strong>87%</strong>
+          <span>Hasil klasifikasi model</span>
+        </article>
+
+        <article class="about-stat-card">
+          <small>Parameter</small>
+          <strong>3</strong>
+          <span>Lereng, hujan, tutupan lahan</span>
+        </article>
+
+        <article class="about-stat-card">
+          <small>Area Studi</small>
+          <strong>2</strong>
+          <span>Perusahaan tambang</span>
+        </article>
+
+        <article class="about-stat-card">
+          <small>Output</small>
+          <strong>GIS</strong>
+          <span>Peta kerawanan interaktif</span>
+        </article>
+      </section>
+
+      <section class="about-card-grid">
+        <article class="info-card">
+          <div class="info-icon blue-icon">🎯</div>
+          <h3>Tujuan Penelitian</h3>
+          <p>
+            Mengidentifikasi dan memvisualisasikan area rawan dampak pertambangan agar informasi spasial lebih mudah dipahami oleh pengguna.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="info-icon green-icon">🌲</div>
+          <h3>Algoritma</h3>
+          <p>
+            Random Forest digunakan untuk melakukan klasifikasi tingkat kerawanan berdasarkan kombinasi parameter spasial.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="info-icon purple-icon">🗺️</div>
+          <h3>Area Studi</h3>
+          <p>
+            Wilayah penelitian berada di Kabupaten Konawe Selatan dengan fokus pada area perusahaan tambang dan wilayah sekitarnya.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="info-icon orange-icon">📦</div>
+          <h3>Dataset</h3>
+          <p>
+            Data yang digunakan meliputi data elevasi, curah hujan, tutupan lahan, area perusahaan, serta hasil pengolahan di Google Earth Engine.
+          </p>
+        </article>
+      </section>
+
+      <section class="workflow-card">
+        <div class="section-heading">
+          <h3>Alur Kerja Sistem</h3>
+          <p>Ringkasan proses dari pengolahan parameter hingga peta kerawanan ditampilkan pada Web GIS.</p>
+        </div>
+
+        <div class="workflow-line">
+          <div class="workflow-step"><span>1</span><strong>Input Data</strong><small>Lereng, hujan, tutupan lahan</small></div>
+          <div class="workflow-arrow">→</div>
+          <div class="workflow-step"><span>2</span><strong>Pra-pemrosesan</strong><small>Masking dan penyamaan area</small></div>
+          <div class="workflow-arrow">→</div>
+          <div class="workflow-step rf-step"><span>3</span><strong>Random Forest</strong><small>Klasifikasi kerawanan</small></div>
+          <div class="workflow-arrow">→</div>
+          <div class="workflow-step result-step"><span>4</span><strong>Web GIS</strong><small>Visualisasi hasil analisis</small></div>
+        </div>
+      </section>
+
+      <section class="about-two-column">
+        <article class="detail-card">
+          <h3>Fitur Utama Sistem</h3>
+          <ul>
+            <li>Menampilkan peta hasil klasifikasi kerawanan.</li>
+            <li>Mengaktifkan dan menonaktifkan layer parameter.</li>
+            <li>Melihat legenda kelas kerawanan.</li>
+            <li>Memilih lokasi perusahaan tambang.</li>
+            <li>Menampilkan ringkasan akurasi dan statistik hasil analisis.</li>
+          </ul>
+        </article>
+
+        <article class="developer-card-new">
+          <h3>Pengembang Sistem</h3>
+          <div class="developer-avatar">A</div>
+          <strong>Ayustina Samudin</strong>
+          <p>Program Studi Informatika<br>Universitas Halu Oleo</p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <footer class="dashboard-footer">
+    <span>GIS Area Rawan Dampak Pertambangan - Kabupaten Konawe Selatan</span>
+    <span>Sumber Data: DEMNAS, CHIRPS, ESA WorldCover, Interpretasi Citra</span>
+    <span>© 2024</span>
+  </footer>
+</section>
+
+<script>
+  const user = localStorage.getItem("user");
+
+  if (!user) {
+    window.location.href = "login.php";
+  }
+
+  const logoutBtns = document.querySelectorAll(".logoutBtn");
+
+  logoutBtns.forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+      localStorage.removeItem("user");
+      window.location.href = "index.php";
+    });
+  });
+</script>
+</body>
+</html>

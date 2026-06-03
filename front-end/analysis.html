@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistik - GIS Area Rawan Dampak Pertambangan</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dashboard-redesign.css">
+  <link rel="stylesheet" href="analysis-style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+
+<body>
+<section id="analysisPage" class="page active analysis-page">
+
+  <!-- ================= TOPBAR ================= -->
+  <header class="topbar">
+    <div class="brand-area">
+      <img src="assets/logo_konsel.png" alt="Logo Konawe Selatan" class="brand-logo">
+      <div>
+        <h1>GIS Area Rawan Dampak Pertambangan</h1>
+        <p>Kabupaten Konawe Selatan</p>
+      </div>
+    </div>
+
+    <nav class="top-nav" aria-label="Navigasi utama">
+      <a href="dashboard.php">▥ Dashboard</a>
+      <a href="analysis.php" class="active">⌁ Statistik</a>
+      <a href="about.php">ⓘ Tentang</a>
+    </nav>
+
+    <div class="university-area">
+      <img src="assets/logo_uho.png" alt="Logo Universitas Halu Oleo" class="uho-logo">
+      <span>UNIVERSITAS<br>HALU OLEO</span>
+    </div>
+  </header>
+
+  <div class="analysis-shell">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="analysis-sidebar">
+      <div class="side-title">NAVIGASI</div>
+
+      <nav class="side-nav">
+        <a href="dashboard.php">▥ <span>Dashboard</span></a>
+        <a href="analysis.php" class="active">⌁ <span>Statistik</span></a>
+        <a href="about.php">ⓘ <span>Tentang</span></a>
+      </nav>
+
+      <div class="side-note">
+        <h3>ⓘ Tentang Statistik</h3>
+        <p>Statistik kerawanan menampilkan akurasi model, luas area per kelas, feature importance, distribusi probabilitas, dan confusion matrix berdasarkan hasil Random Forest.</p>
+      </div>
+    </aside>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="analysis-main">
+      <div class="page-heading">
+        <h2>Statistik</h2>
+        <div class="breadcrumb"><a href="dashboard.php">Dashboard</a><span>›</span><strong>Statistik</strong></div>
+      </div>
+
+      <!-- ================= SUMMARY CARDS ================= -->
+      <section class="summary-grid">
+        <article class="summary-card">
+          <div class="summary-icon blue">⌁</div>
+          <div>
+            <span>Akurasi Model</span>
+            <strong id="metricAccuracy">84.00%</strong>
+            <p>Baik</p>
+          </div>
+        </article>
+
+        <article class="summary-card">
+          <div class="summary-icon green">✓</div>
+          <div>
+            <span>Precision</span>
+            <strong id="metricPrecision">87.28%</strong>
+            <p>Baik</p>
+          </div>
+        </article>
+
+        <article class="summary-card">
+          <div class="summary-icon purple">◎</div>
+          <div>
+            <span>Recall (Sensitivity)</span>
+            <strong id="metricRecall">84.49%</strong>
+            <p>Baik</p>
+          </div>
+        </article>
+
+        <article class="summary-card">
+          <div class="summary-icon orange">▥</div>
+          <div>
+            <span>F1-Score</span>
+            <strong id="metricF1">84.13%</strong>
+            <p>Baik</p>
+          </div>
+        </article>
+
+        <article class="summary-card">
+          <div class="summary-icon teal">▢</div>
+          <div>
+            <span>Kappa Index</span>
+            <strong id="metricKappa">0.7695</strong>
+            <p>Substantial Agreement</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="analysis-grid">
+
+        <!-- MAP CARD -->
+        <article class="analysis-card map-result-card">
+          <div class="card-title-row">
+            <h3>Peta Hasil Analisis Kerawanan</h3>
+            <button type="button" id="viewMapBtn">↗ Lihat di Peta</button>
+          </div>
+
+          <div class="analysis-map-wrap">
+            <div id="analysisMap"></div>
+
+            <div class="map-tools-mini">
+              <button type="button" id="mapZoomIn">+</button>
+              <button type="button" id="mapZoomOut">−</button>
+              <button type="button" id="mapHome">⌂</button>
+              <button type="button" id="mapLayerToggle">◈</button>
+            </div>
+
+            <div class="map-risk-legend">
+              <h4>Kelas Kerawanan</h4>
+              <span><i class="dot-safe"></i>Aman</span>
+              <span><i class="dot-medium"></i>Sedang</span>
+              <span><i class="dot-danger"></i>Rawan</span>
+            </div>
+
+            <div class="map-scale">0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15 km</div>
+          </div>
+        </article>
+
+        <!-- AREA STATISTIC -->
+        <article class="analysis-card area-card">
+          <h3>Luas Area per Kelas Kerawanan</h3>
+          <div class="area-flex">
+            <div class="donut-chart" id="areaDonut"></div>
+            <div class="area-table-wrap">
+              <table class="area-table">
+                <thead>
+                  <tr>
+                    <th>Kelas Kerawanan</th>
+                    <th>Luas (ha)</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody id="areaTableBody">
+  <tr>
+    <td><i class="dot-safe"></i>Aman</td>
+    <td>230,23</td>
+    <td>28,0%</td>
+  </tr>
+
+  <tr>
+    <td><i class="dot-medium"></i>Sedang</td>
+    <td>527,43</td>
+    <td>64,2%</td>
+  </tr>
+
+  <tr>
+    <td><i class="dot-danger"></i>Rawan</td>
+    <td>63,31</td>
+    <td>7,7%</td>
+  </tr>
+
+  <tr class="total-row">
+    <td>Total</td>
+    <td>820,97</td>
+    <td>100%</td>
+  </tr>
+</tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+
+        <!-- FEATURE IMPORTANCE -->
+        <article class="analysis-card feature-importance-card">
+          <div class="card-title-row">
+            <h3>Pengaruh Parameter (Feature Importance)</h3>
+            <span class="info-dot">ⓘ</span>
+          </div>
+
+         <div class="importance-list">
+
+  <div class="importance-row">
+    <div class="importance-label">Kemiringan Lereng</div>
+
+    <div class="importance-track">
+      <div class="importance-fill slope-fill" style="width: 48.38%;"></div>
+    </div>
+
+    <div class="importance-value">48.38%</div>
+  </div>
+
+  <div class="importance-row">
+    <div class="importance-label">Curah Hujan</div>
+
+    <div class="importance-track">
+      <div class="importance-fill rain-fill" style="width: 0%;"></div>
+    </div>
+
+    <div class="importance-value">0.00%</div>
+  </div>
+
+  <div class="importance-row">
+    <div class="importance-label">Tutupan Lahan</div>
+
+    <div class="importance-track">
+      <div class="importance-fill landcover-fill" style="width: 51.62%;"></div>
+    </div>
+
+    <div class="importance-value">51.62%</div>
+  </div>
+
+</div>
+
+<div class="percent-axis">
+  <span>0%</span>
+  <span>25%</span>
+  <span>50%</span>
+  <span>75%</span>
+  <span>100%</span>
+</div>
+        </article>
+
+        <!-- MODEL STATISTIC -->
+        <article class="analysis-card model-stat-card">
+          <h3>Statistik Model</h3>
+          <dl>
+            <div><dt>Jumlah Data Training</dt><dd id="trainingCount">222 Titik</dd></div>
+            <div><dt>Jumlah Data Testing</dt><dd id="testingCount">78 Titik</dd></div>
+            <div><dt>Total Data</dt><dd id="totalDataCount">300 Titik</dd></div>
+            <div><dt>Algoritma</dt><dd>Random Forest</dd></div>
+            <div><dt>Jumlah Pohon</dt><dd>100</dd></div>
+            <div><dt>Max Depth</dt><dd>—</dd></div>
+            <div><dt>Min Samples Leaf</dt><dd>1</dd></div>
+          </dl>
+        </article>
+
+        <!-- CONFUSION MATRIX -->
+<article class="analysis-card confusion-card">
+  <div class="card-title-row">
+    <h3>Confusion Matrix</h3>
+    <span class="info-dot">ⓘ</span>
+  </div>
+
+  <div class="matrix-wrap">
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th>Aktual \ Prediksi</th>
+          <th>Aman</th>
+          <th>Sedang</th>
+          <th>Rawan</th>
+          <th>Total</th>
+          <th>Producer's Accuracy</th>
+        </tr>
+      </thead>
+
+      <tbody id="matrixBody">
+        <tr>
+          <th>Aman</th>
+          <td class="true-cell">69</td>
+          <td>3</td>
+          <td>0</td>
+          <td>72</td>
+          <td>95.8%</td>
+        </tr>
+
+        <tr>
+          <th>Sedang</th>
+          <td>8</td>
+          <td class="true-cell">67</td>
+          <td>1</td>
+          <td>76</td>
+          <td>88.2%</td>
+        </tr>
+
+        <tr>
+          <th>Rawan</th>
+          <td>0</td>
+          <td>32</td>
+          <td class="true-cell">42</td>
+          <td>74</td>
+          <td>56.8%</td>
+        </tr>
+
+        <tr>
+          <th>Total</th>
+          <td>77</td>
+          <td>102</td>
+          <td>43</td>
+          <td>222</td>
+          <td>—</td>
+        </tr>
+
+        <tr>
+          <th>User's Accuracy</th>
+          <td>89.6%</td>
+          <td>65.7%</td>
+          <td>97.7%</td>
+          <td>—</td>
+          <td>80.2%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>
+      </section>
+    </main>
+  </div>
+
+  <footer class="analysis-footer">
+    <span>GIS Area Rawan Dampak Pertambangan - Kabupaten Konawe Selatan</span>
+    <span>Sumber Data: DEMNAS, CHIRPS, ESA WorldCover, Interpretasi Citra</span>
+    <span>© 2024</span>
+  </footer>
+</section>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="analysis.js"></script>
+</body>
+</html>
